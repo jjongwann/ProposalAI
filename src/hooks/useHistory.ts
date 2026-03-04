@@ -5,6 +5,7 @@ import type { ProposalRecord, ProposalContent } from '@/types'
 interface UseHistoryResult {
   history: ProposalRecord[]
   saveProposal: (record: { url: string; prompt: string; content: ProposalContent }) => Promise<void>
+  deleteProposal: (id: string) => Promise<void>
   isLoadingHistory: boolean
 }
 
@@ -57,5 +58,13 @@ export function useHistory(): UseHistoryResult {
     }
   }
 
-  return { history, saveProposal, isLoadingHistory }
+  const deleteProposal = async (id: string) => {
+    if (!isSupabaseConfigured || !supabase) return
+    const { error } = await supabase.from('proposals').delete().eq('id', id)
+    if (!error) {
+      setHistory((prev) => prev.filter((item) => item.id !== id))
+    }
+  }
+
+  return { history, saveProposal, deleteProposal, isLoadingHistory }
 }

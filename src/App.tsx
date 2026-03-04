@@ -17,7 +17,7 @@ function App() {
   const [proposal, setProposal] = useState<ProposalContent | null>(null)
 
   const { generate, isLoading, error, status } = useProposal()
-  const { history, saveProposal, isLoadingHistory } = useHistory()
+  const { history, saveProposal, deleteProposal, isLoadingHistory } = useHistory()
 
   const handlePromptChange = (value: string) => {
     setPrompt(value)
@@ -60,6 +60,7 @@ function App() {
             history={history}
             isLoadingHistory={isLoadingHistory}
             onSelect={handleSelectHistory}
+            onDelete={deleteProposal}
           />
         </aside>
 

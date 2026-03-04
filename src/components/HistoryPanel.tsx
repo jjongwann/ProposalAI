@@ -5,9 +5,10 @@ interface HistoryPanelProps {
   history: ProposalRecord[]
   isLoadingHistory: boolean
   onSelect: (proposal: ProposalRecord) => void
+  onDelete: (id: string) => void
 }
 
-export function HistoryPanel({ history, isLoadingHistory, onSelect }: HistoryPanelProps) {
+export function HistoryPanel({ history, isLoadingHistory, onSelect, onDelete }: HistoryPanelProps) {
   return (
     <aside className="history-panel glass-card">
       <h2 className="history-panel__title">생성 기록</h2>
@@ -19,7 +20,7 @@ export function HistoryPanel({ history, isLoadingHistory, onSelect }: HistoryPan
         <ul className="history-panel__list">
           {history.map((item) => (
             <li key={item.id}>
-              <HistoryItem proposal={item} onSelect={onSelect} />
+              <HistoryItem proposal={item} onSelect={onSelect} onDelete={onDelete} />
             </li>
           ))}
         </ul>
