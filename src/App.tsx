@@ -61,15 +61,8 @@ function App() {
 
   const handleDownload = () => {
     if (!proposal) return
-    const md = proposalToMarkdown(proposal, url)
-    const hostname = (() => { try { return new URL(url).hostname } catch { return 'proposal' } })()
-    const blob = new Blob([md], { type: 'text/markdown;charset=utf-8' })
-    const a = document.createElement('a')
-    a.href = URL.createObjectURL(blob)
-    a.download = `${hostname}-소개서.md`
-    a.click()
-    URL.revokeObjectURL(a.href)
-    showToast('마크다운 파일로 저장됐습니다')
+    showToast('PDF 저장 창이 열립니다')
+    setTimeout(() => window.print(), 300)
   }
 
   const handleCopySection = async (text: string) => {
@@ -87,10 +80,16 @@ function App() {
 
       <header className="app-header">
         <div className="app-header__inner">
-          <div className="app-brand">
-            <span className="app-brand__icon">P</span>
+          <button
+            type="button"
+            className="app-brand"
+            onClick={() => window.location.reload()}
+            aria-label="새로고침"
+            title="클릭하여 새로고침"
+          >
+            <span className="app-brand__icon">M</span>
             <h1 className="app-title">ProposalAI</h1>
-          </div>
+          </button>
           <div className="app-header-divider" />
           <p className="app-subtitle">URL만 입력하면 AI가 서비스 소개서를 자동으로 작성해드립니다</p>
         </div>

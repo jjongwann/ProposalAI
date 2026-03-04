@@ -135,6 +135,17 @@ body {
   align-items: center;
   gap: 11px;
   flex-shrink: 0;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+  text-decoration: none;
+  transition: opacity var(--t-fast);
+}
+
+.app-brand:hover {
+  opacity: 0.75;
 }
 
 .app-brand__icon {
@@ -814,4 +825,66 @@ details[open] .prompt-editor__toggle {
   .toast-container { bottom: 14px; right: 14px; left: 14px; }
   .app-header__inner { flex-wrap: wrap; }
   .app-subtitle { display: none; }
+}
+
+/* ── Print / PDF ──────────────────────────────────── */
+@media print {
+  .app-header,
+  .app-sidebar,
+  .proposal-toolbar,
+  .section-copy-btn,
+  .toast-container {
+    display: none !important;
+  }
+
+  body {
+    background: #fff !important;
+    color: #111 !important;
+  }
+
+  .app {
+    padding: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .app-layout {
+    display: block !important;
+  }
+
+  .app-main {
+    width: 100% !important;
+  }
+
+  .proposal-view--result {
+    gap: 16px !important;
+  }
+
+  .proposal-section {
+    background: none !important;
+    border: 1px solid #ddd !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    padding: 16px 20px !important;
+  }
+
+  .proposal-section__title {
+    color: #555 !important;
+  }
+
+  .proposal-section__icon,
+  .proposal-section__count {
+    display: none !important;
+  }
+
+  .proposal-section__text,
+  .proposal-section__list-item {
+    color: #111 !important;
+  }
+
+  .proposal-section__list-item::before {
+    color: #888 !important;
+  }
 }
