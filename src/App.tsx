@@ -5,6 +5,7 @@ import { ProposalView } from '@/components/ProposalView'
 import { HistoryPanel } from '@/components/HistoryPanel'
 import { useProposal } from '@/hooks/useProposal'
 import { useHistory } from '@/hooks/useHistory'
+import { useImages } from '@/hooks/useImages'
 import { DEFAULT_PROMPT } from '@/lib/prompt'
 import { proposalToMarkdown } from '@/lib/markdown'
 import type { ProposalContent, ProposalRecord } from '@/types'
@@ -26,6 +27,7 @@ function App() {
 
   const { generate, isLoading, error, status } = useProposal()
   const { history, saveProposal, deleteProposal, isLoadingHistory } = useHistory()
+  const imageMap = useImages(proposal)
 
   const showToast = useCallback((message: string, type: 'success' | 'error' = 'success') => {
     const id = Date.now()
@@ -123,6 +125,7 @@ function App() {
             onCopyAll={handleCopyAll}
             onDownload={handleDownload}
             onCopySection={handleCopySection}
+            imageMap={imageMap}
           />
         </main>
       </div>

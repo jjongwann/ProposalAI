@@ -685,6 +685,41 @@ details[open] .prompt-editor__toggle {
   50%       { transform: translateY(-7px); }
 }
 
+/* ── Section Image Banner ─────────────────────────── */
+.section-image {
+  position: relative;
+  height: 160px;
+  overflow: hidden;
+  border-radius: var(--r-lg) var(--r-lg) 0 0;
+}
+
+.section-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.proposal-section:hover .section-image img {
+  transform: scale(1.03);
+}
+
+.section-image__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(6,6,10,0.1) 0%,
+    rgba(6,6,10,0.5) 60%,
+    rgba(6,6,10,0.92) 100%
+  );
+}
+
+.section-content {
+  padding: 20px 22px;
+}
+
 /* ── Proposal Sections ────────────────────────────── */
 .proposal-view--result {
   display: flex;
@@ -693,8 +728,14 @@ details[open] .prompt-editor__toggle {
 }
 
 .proposal-section {
-  padding: 20px 22px;
+  padding: 0;
   animation: sectionIn 0.3s ease both;
+  overflow: hidden;
+}
+
+/* 이미지 없을 때는 section-content가 전체 패딩 담당 */
+.proposal-section:not(:has(.section-image)) .section-content {
+  padding: 20px 22px;
 }
 
 @keyframes sectionIn {

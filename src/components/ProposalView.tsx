@@ -1,4 +1,5 @@
 import type { ProposalContent } from '@/types'
+import type { ImageMap } from '@/hooks/useImages'
 import { ProposalSection } from './ProposalSection'
 
 interface ProposalViewProps {
@@ -9,6 +10,7 @@ interface ProposalViewProps {
   onCopyAll: () => void
   onDownload: () => void
   onCopySection: (text: string) => void
+  imageMap: ImageMap
 }
 
 const SECTIONS: { key: keyof ProposalContent; title: string; icon: string }[] = [
@@ -23,7 +25,7 @@ const SECTIONS: { key: keyof ProposalContent; title: string; icon: string }[] = 
 const LOADING_STEPS = ['URL 콘텐츠 가져오는 중', 'AI가 분석하는 중', '소개서 작성 중']
 
 export function ProposalView({
-  proposal, isLoading, error, status, onCopyAll, onDownload, onCopySection,
+  proposal, isLoading, error, status, onCopyAll, onDownload, onCopySection, imageMap,
 }: ProposalViewProps) {
   if (isLoading) {
     return (
@@ -85,7 +87,7 @@ export function ProposalView({
               <polyline points="7 10 12 15 17 10"/>
               <line x1="12" y1="15" x2="12" y2="3"/>
             </svg>
-            저장
+            PDF 저장
           </button>
         </div>
       </div>
@@ -97,6 +99,7 @@ export function ProposalView({
           index={index}
           content={proposal[key] as string | string[]}
           onCopy={onCopySection}
+          imageUrl={imageMap[key]}
         />
       ))}
     </div>
