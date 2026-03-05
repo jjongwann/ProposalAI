@@ -691,6 +691,7 @@ details[open] .prompt-editor__toggle {
   height: 160px;
   overflow: hidden;
   border-radius: var(--r-lg) var(--r-lg) 0 0;
+  animation: fadeIn 0.4s ease;
 }
 
 .section-image img {

@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react'
+
 interface ProposalSectionProps {
   title: string
   icon: string
@@ -11,16 +13,32 @@ export function ProposalSection({ title, icon, index, content, onCopy, imageUrl 
   const textContent = Array.isArray(content) ? content.join('\n') : content
   const count = Array.isArray(content) ? `${content.length}개` : `${textContent.length}자`
 
+  // 이미지가 실제로 로드된 후에만 컨테이너 표시 (검은 빈 박스 방지)
+  const [imgLoaded, setImgLoaded] = useState(false)
+  useEffect(() => { setImgLoaded(false) }, [imageUrl])
+
   return (
     <div
       className="proposal-section glass-card"
       style={{ animationDelay: `${index * 0.07}s` }}
     >
       {imageUrl && (
-        <div className="section-image">
-          <img src={imageUrl} alt={title} />
-          <div className="section-image__overlay" />
-        </div>
+        <>
+          {/* 실제 이미지는 숨겨진 채로 로드 — onLoad 후 컨테이너 표시 */}
+          <img
+            src={imageUrl}
+            alt=""
+            style={{ display: 'none' }}
+            onLoad={() => setImgLoaded(true)}
+            onError={() => setImgLoaded(false)}
+          />
+          {imgLoaded && (
+            <div className="section-image">
+              <img src={imageUrl} alt={title} />
+              <div className="section-image__overlay" />
+            </div>
+          )}
+        </>
       )}
       <div className="section-content">
         <div className="proposal-section__header">
