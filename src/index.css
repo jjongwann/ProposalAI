@@ -908,7 +908,33 @@ details[open] .prompt-editor__toggle {
     -webkit-backdrop-filter: none !important;
     page-break-inside: avoid;
     break-inside: avoid;
-    padding: 16px 20px !important;
+    padding: 0 !important;         /* section-content이 패딩 담당 */
+    overflow: visible !important;
+  }
+
+  /* 이미지 없는 섹션은 섹션 자체에 패딩 */
+  .proposal-section:not(:has(.section-image)) {
+    padding: 14px 18px !important;
+  }
+
+  .section-content {
+    padding: 14px 18px !important;
+  }
+
+  /* 이미지 인쇄 허용 */
+  .section-image {
+    height: 120px !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .section-image img {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .section-image__overlay {
+    display: none !important;
   }
 
   .proposal-section__title {

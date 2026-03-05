@@ -18,7 +18,7 @@ export function ProposalSection({ title, icon, index, content, onCopy, imageUrl 
     >
       {imageUrl && (
         <div className="section-image">
-          <img src={imageUrl} alt={title} loading="lazy" />
+          <img src={imageUrl} alt={title} />
           <div className="section-image__overlay" />
         </div>
       )}
