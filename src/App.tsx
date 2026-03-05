@@ -27,7 +27,7 @@ function App() {
 
   const { generate, isLoading, error, status } = useProposal()
   const { history, saveProposal, deleteProposal, isLoadingHistory } = useHistory()
-  const imageMap = useImages(proposal)
+  const imageMap = useImages(proposal, url)
 
   const showToast = useCallback((message: string, type: 'success' | 'error' = 'success') => {
     const id = Date.now()
